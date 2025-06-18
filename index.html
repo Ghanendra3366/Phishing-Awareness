@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Awareness Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css"> <!-- Add this line -->
+</head>
+<body>
+    <header>
+        <h1>Phishing Awareness</h1>
+        <p>Learn how to spot phishing emails and protect yourself online.</p>
+    </header>
+    <main>
+        <section>
+            <h2>What is Phishing?</h2>
+            <p>
+                Phishing is a type of online scam where attackers impersonate legitimate organizations via email, text message, or other means to steal sensitive information such as passwords, credit card numbers, or personal details.
+            </p>
+        </section>
+        <section>
+            <h2>How to Detect Phishing Emails</h2>
+            <div class="tips">
+                <ul>
+                    <li><strong>Check the sender's email address</strong> for misspellings or suspicious domains.</li>
+                    <li><strong>Look for urgent or threatening language</strong> that pressures you to act quickly.</li>
+                    <li><strong>Hover over links</strong> to see where they really lead before clicking.</li>
+                    <li><strong>Beware of unexpected attachments</strong> or requests for personal information.</li>
+                    <li><strong>Check for poor grammar and spelling mistakes.</strong></li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h2>Real Email Examples</h2>
+            <div class="example phishing">
+                <h3>Phishing Example</h3>
+                <p><strong>From:</strong> support@micros0ft-secure.com</p>
+                <p><strong>Subject:</strong> Urgent: Your Account Will Be Locked!</p>
+                <p>
+                    Dear user,<br>
+                    We noticed suspicious activity in your account. Please <a href="#">click here</a> to verify your information or your account will be suspended.<br>
+                    Thank you,<br>
+                    Microsoft Support Team
+                </p>
+                <ul>
+                    <li>Notice the misspelled sender domain (<code>micros0ft-secure.com</code> instead of <code>microsoft.com</code>).</li>
+                    <li>Urgent language and threats.</li>
+                    <li>Suspicious link.</li>
+                </ul>
+            </div>
+            <div class="example legit">
+                <h3>Legitimate Example</h3>
+                <p><strong>From:</strong> support@microsoft.com</p>
+                <p><strong>Subject:</strong> Security Alert: Unusual Sign-in Activity</p>
+                <p>
+                    Hello,<br>
+                    We detected a sign-in attempt from a new device. If this was you, no action is needed. If not, please visit your account at <a href="https://account.microsoft.com">https://account.microsoft.com</a>.<br>
+                    Thank you,<br>
+                    Microsoft Account Team
+                </p>
+                <ul>
+                    <li>Official sender address.</li>
+                    <li>No threats or urgent demands.</li>
+                    <li>Directs you to log in via the official website.</li>
+                </ul>
+            </div>
+        </section>
+        <section>
+            <h2>Interactive Email Examples</h2>
+            <div id="examples"></div> <!-- Add this div for JS examples -->
+        </section>
+        <section>
+            <h2>Test Your Knowledge</h2>
+            <p>Can you spot the phishing email? <a href="#" id="open-quiz">Take our quiz!</a></p>
+        </section>
+
+        <!-- Quiz Modal -->
+        <div id="quiz-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:#fff; padding:2rem; border-radius:8px; max-width:400px; margin:auto; position:relative;">
+                <button id="close-quiz" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:1.5rem; cursor:pointer;" aria-label="Close">&times;</button>
+                <h3>Quiz: Is this email phishing?</h3>
+                <p>
+                    <strong>From:</strong> alert@secure-paypal.com<br>
+                    <strong>Subject:</strong> Action Required: Account Verification<br>
+                    Dear user,<br>
+                    We noticed unusual activity. Please <a href="#">click here</a> to verify your account or it will be suspended.
+                </p>
+                <button id="quiz-phishing" style="margin-right:10px;">Phishing</button>
+                <button id="quiz-legit">Legitimate</button>
+                <div id="quiz-result" style="margin-top:1rem; font-weight:bold;"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Phishing Awareness. Stay safe online!
+    </footer>
+    <script src="script.js"></script>
+    <script>
+    // Quiz modal logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const openQuiz = document.getElementById('open-quiz');
+        const quizModal = document.getElementById('quiz-modal');
+        const closeQuiz = document.getElementById('close-quiz');
+        const quizPhishing = document.getElementById('quiz-phishing');
+        const quizLegit = document.getElementById('quiz-legit');
+        const quizResult = document.getElementById('quiz-result');
+
+        if (openQuiz && quizModal && closeQuiz && quizPhishing && quizLegit && quizResult) {
+            openQuiz.onclick = function(e) {
+                e.preventDefault();
+                quizModal.style.display = 'flex';
+                quizResult.textContent = '';
+            };
+            closeQuiz.onclick = function() {
+                quizModal.style.display = 'none';
+            };
+            quizPhishing.onclick = function() {
+                quizResult.textContent = 'Correct! This is a phishing email.';
+                quizResult.style.color = 'green';
+            };
+            quizLegit.onclick = function() {
+                quizResult.textContent = 'Incorrect. This is actually a phishing email.';
+                quizResult.style.color = 'red';
+            };
+            // Close modal on outside click
+            quizModal.onclick = function(e) {
+                if (e.target === quizModal) quizModal.style.display = 'none';
+            };
+        }
+    });
+    </script>
+</body>
+</html>
